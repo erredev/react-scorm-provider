@@ -79,7 +79,7 @@ class ScormProvider extends Component {
     if (!this.state.apiConnected) return;
 
     this.setSuspendData();
-    SCORM.status('set', this.state.completionStatus);
+    //SCORM.status('set', this.state.completionStatus);
 
     let elapsedSessionSeconds = Date.now() - this.sessionStartDateTime;
     let formattedTime = ((new Date(elapsedSessionSeconds)).toISOString().substring(11, 19));
