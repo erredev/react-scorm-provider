@@ -36,6 +36,7 @@ class ScormProvider extends Component {
       suspendData: {},
       scormVersion: ''
     };
+    this.sessionStartDateTime = Date.now();
 
     autoBind(this);
   }
@@ -79,6 +80,11 @@ class ScormProvider extends Component {
 
     this.setSuspendData();
     SCORM.status('set', this.state.completionStatus);
+
+    let elapsedSessionSeconds = Date.now() - this.sessionStartDateTime;
+    let formattedTime = ((new Date(elapsedSessionSeconds)).toISOString().substring(11, 19));
+    SCORM.set('cmi.core.session_time', formattedTime);
+
     SCORM.save();
     const success = SCORM.quit();
     if (success) {
